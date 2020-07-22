@@ -2,14 +2,22 @@
   "name": "quick-query-selector",
   "version": "1.0.0",
   "description": "A quick alternative to querySelector and addEventListener",
-  "source": "./index.js",         
+  "source": "src/index.js",
   "main": "dist/qs.js",
   "module": "dist/qs.module.js",
   "unpkg": "dist/qs.umd.js",
   "scripts": {
-    "build": "microbundle",  
-    "dev": "microbundle watch"
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "jest"
   },
   "author": "CTNicholas",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.1.0"
+  },
+  "dependencies": {
+    "microbundle": "^0.12.3",
+    "rewire": "^5.0.0"
+  }
 }
