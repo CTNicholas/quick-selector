@@ -1,0 +1,2 @@
+!function(e,n){"object"==typeof exports&&"undefined"!=typeof module?module.exports=n():"function"==typeof define&&define.amd?define(n):(e=e||self).quickQuerySelector=n()}(this,function(){function e(e,n){return e.map(function(e,o){return(e||"")+(n[o]||"")}).join()}return function(n){var o=e(n,[].slice.call(arguments,1)),t=document.querySelector(o);return t.onclick=function(){return console.log("clicked")},t}});
+//# sourceMappingURL=qs.umd.js.map
