@@ -19,7 +19,7 @@ const qs = require('query-selector')
 ### Browser
 
 ``` html
-<script src="https://unpkg.com/quick-selector@1.0.2/dist/qs.js"></script>
+<script src="https://unpkg.com/quick-selector/dist/qs.js"></script>
 ```
 
 ## Usage
