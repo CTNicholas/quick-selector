@@ -22,8 +22,6 @@ const qs = require('query-selector')
 <script src="https://unpkg.com/quick-selector@1.0.2/dist/qs.js"></script>
 ```
 
-
-
 ## Usage
 
 ### Selecting
@@ -140,6 +138,5 @@ for (const box of textBox) {
 | .set()         | *Function*. Pass a function that will be applied to a `.forEach()` method, iterating through the object. | The templated array it was called upon.                     | More info on [.forEach() at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach). |
 | .get()         | *Function*. Pass a function that will be applied to a `.forEach()` method, iterating through the object. | A new array containing the return values from the function. | More info on [.forEach() at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach). |
 | .only()        | *Number*. Pass a positive integer, corresponding to the index of the item in the quick-select array. | A templated array containing only the selected element.     | `.only(0)` selects the first item on the page that matched the quick-select query. |
-|                |                                                              |                                                             |                                                              |
 
 Note: All Array methods work, but the above methods all return a templated quick-select array (apart from `.get()`), and can be used with method chaining.
