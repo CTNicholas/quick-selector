@@ -1,22 +1,30 @@
 /*
  * Initialise events and template
  */
-const addTemplate = createTemplate()
+const addTemplate = initTemplate()
 
 /*
  * Exports qs function
- * Creates querySelectorAll, and return templated result
+ * Creates new DOM query, and returns templated result
  * If element array passed, return templated result
  */
 module.exports = function (literals, ...substitutions) {
   const query = createQuery(literals, substitutions)
-  if (!query || query.length === 0 || query === '[object Object]') return null
-  if (Array.isArray(query)) {
+  if (isInvalidQuery(query)) return null
+  if (isArray(query)) {
     return addTemplate(query)
   } else {
-    const elements = Array.from(document.querySelectorAll(query))
-    return elements.length > 0 ? addTemplate(elements) : []
+    return newQuerySelector(query)
   }
+}
+
+/*
+ * Gets elements with querySelectorAll and adds template
+ * If no elements, return empty array
+ */
+function newQuerySelector(query) {
+  const elements = Array.from(document.querySelectorAll(query))
+  return elements.length > 0 ? addTemplate(elements) : []
 }
 
 /*
@@ -43,7 +51,7 @@ module.exports = function (literals, ...substitutions) {
  *   Filter
  *   qs`.element`.filter(el => el.innerHTML.includes('Title'))
  */
-function createTemplate () {
+function initTemplate () {
   const events = getAllEvents()
   const customMethods = {
     set: setFunction,
@@ -84,9 +92,7 @@ function addAFunction (customProps, propName, propFunc, funcVars) {
 function eventFunction ({ elements, event }) {
   return function (func) {
     elements.forEach(element => {
-      element.addEventListener(event, func)// (jsEvent) => {
-      //  func (jsEvent, elements)
-      //})
+      element.addEventListener(event, func)
     })
     return elements
   }
@@ -97,7 +103,6 @@ function eventFunction ({ elements, event }) {
  */
 function removeEventFunction ({ elements, event }) {
   return function (func) {
-    console.log('Removing', event, elements)
     elements.forEach(element => {
       element.removeEventListener(event, func)
     })
@@ -161,17 +166,15 @@ function getAllEvents () {
  * If not valid, return null
  */
 function createQuery (literals, substitutions) {
-  if (Array.isArray(literals) && literals.every(isValidElement)) {
+  if (isArray(literals) && isElement(...literals)) {
     return literals
-  } else if (Array.isArray(literals) && Array.isArray(substitutions)) {
-    if (literals.join() === '' && substitutions.every(isValidElement)) {
+  } else if (isArray(literals, substitutions)) {
+    if (literals.join() === '' && isElement(...substitutions)) {
       return substitutions
     } else {
-      return literals.map((literal, index) => {
-        return (literal || '') + (substitutions[index] || '')
-      }).join('') || null
+      return combineTemplateArrays(literals, substitutions) || null
     }
-  } else if (typeof literals === 'string' || literals instanceof String) {
+  } else if (isString(literals)) {
     return literals
   } else {
     return null
@@ -179,8 +182,39 @@ function createQuery (literals, substitutions) {
 }
 
 /*
- *  Check if element is valid DOM element
+ * Combines two arrays into one string, one index at a time
+ * If undefined, uses an empty string
+ */ 
+function combineTemplateArrays(literals, substitutions) {
+  return literals.map((literal, index) => {
+    return (literal || '') + (substitutions[index] || '')
+  }).join('')
+}
+
+/*
+ * Check if arguments are valid DOM elements
  */
-function isValidElement (element) {
-  return element instanceof Element || element instanceof HTMLDocument
+function isElement (...args) {
+  return args.every(arg => arg instanceof Element || arg instanceof HTMLDocument )
+}
+
+/* 
+ * Check if arguments are valid arrays
+*/
+function isArray (...args) {
+  return args.every(arg => Array.isArray(arg))
+}
+
+/* 
+ * Check if arguments are valid strings
+*/
+function isString (...args) {
+  return args.every(arg => typeof arg === 'string' || arg instanceof String)
+}
+
+/*
+ * Checks if valid query
+ */
+function isInvalidQuery(query) {
+  return !query || query.length === 0 || query === '[object Object]'
 }
