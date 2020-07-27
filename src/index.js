@@ -10,11 +10,13 @@ const addTemplate = initTemplate()
  */
 module.exports = function (literals, ...substitutions) {
   const query = createQuery(literals, substitutions)
-  if (isInvalidQuery(query)) return null
+  if (isInvalidQuery(query)) {
+    return null
+  }
   if (isArray(query)) {
     return addTemplate(query)
-  } else {
-    return newQuerySelector(query)
+  }
+  return newQuerySelector(query)
   }
 }
 
