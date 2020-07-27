@@ -1,6 +1,6 @@
 {
   "name": "quick-selector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Syntactic sugar for querySelector, querySelectorAll, & addEventListener allowing you to select, modify, and add event listeners for multiple elements in one line of code.",
   "source": "src/index.js",
   "main": "dist/qs.js",
@@ -18,5 +18,19 @@
     "microbundle": "^0.12.3"
   },
   "dependencies": {},
-  "keywords": ["querySelector", "querySelectorAll", "addEventListener", "event", "events", "elements", "quick", "query", "selector", "select", "dom", "iterate", "browser"]
+  "keywords": [
+    "querySelector",
+    "querySelectorAll",
+    "addEventListener",
+    "event",
+    "events",
+    "elements",
+    "quick",
+    "query",
+    "selector",
+    "select",
+    "dom",
+    "iterate",
+    "browser"
+  ]
 }
