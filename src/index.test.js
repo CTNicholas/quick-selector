@@ -79,7 +79,7 @@ test('adding event listener and testing event', () => {
 test('removing event listener', () => {
   document.body.innerHTML = '<div class="body-part">Hello</div>'
   let testVal = false
-  const clickFunc = () => { console.log(clicked) }
+  const clickFunc = () => { console.log('clicked') }
   qs`.body-part`.click(clickFunc)
   qs`.body-part`.remove.click(clickFunc)
   clickEvent('.body-part', 'click')

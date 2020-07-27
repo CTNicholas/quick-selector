@@ -149,13 +149,15 @@ function onlyFunction ({ elements }) {
 
 /* 
  * Returns an array of names of all available events
- * Will always find a list of events, the second return value is for testing
+ * Works with JSDom for testing
  */
 function getAllEvents () {
-  const allEvents = Object.getOwnPropertyNames(Object.getPrototypeOf(Object.getPrototypeOf(document))).filter(eventName =>
+  const HTMLDocumentEvents = Object.getOwnPropertyNames(Object.getPrototypeOf(document)) || []
+  const DocumentEvents = Object.getOwnPropertyNames(Object.getPrototypeOf(Object.getPrototypeOf(document))) || []
+  const allEventNames = HTMLDocumentEvents.concat(DocumentEvents).filter(eventName =>
     !eventName.indexOf('on') && (document[eventName] == null || typeof document[eventName] == 'function')
   ).map(eventName => eventName.substr(2))
-  return allEvents.length > 0 ? allEvents : ['click', 'mouseover']
+  return allEventNames.length > 0 ? allEventNames : []
 }
 
 /*
