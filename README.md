@@ -1,6 +1,6 @@
 # Quick selector
 
-Syntactic sugar for `querySelector`, `querySelectorAll`, & `addEventListener` allowing you to select, modify, and add event listeners for multiple elements in one line of code. All Javascript events are supported.
+Syntactic sugar for `querySelector`, `querySelectorAll`, & `addEventListener` allowing you to select, modify, and add event listeners for multiple elements in one line of code. Tiny package (<1KB GZIP). All Javascript events are supported.
 
 ## Install
 
