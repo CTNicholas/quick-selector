@@ -26,11 +26,13 @@ const qs = require('query-selector')
 
 ### Selecting
 
-Selecting `<div class="box">` element, use any CSS selectors:
+Selecting `<div class="box">` elements, use any CSS selectors:
 
 ```javascript
 const boxes = qs`div.box`
 ```
+
+*This always returns an array of elements, not just one element.*
 
 ### Events 
 
@@ -49,7 +51,7 @@ qs`#custom-button`.remove.click(clickEvent)
 
 ### Filtering
 
-Selecting only `div.box` elements with the `innerHTML` value of 'Apples':
+Selecting only `.element` elements with the `innerHTML` value of 'Apples':
 
 ```javascript
 const filtered = qs`.subtitle`.filter(element => element.innerHTML === 'Apples')
@@ -135,8 +137,9 @@ for (const box of textBox) {
 | -------------- | ------------------------------------------------------------ | ----------------------------------------------------------- | ------------------------------------------------------------ |
 | .*eventName*() | *Function*. A function to be added to the event.             | The templated array it was called upon.                     | Every single event compatible with the user's browser will work. See Examples:  `.click`, `.mousedown`, `.blur`. |
 | .remove        | *None*. Use in conjunction with an *eventName*() method.     | N/A                                                         | Use `.remove` before an *eventName*() function, with the original function as the argument. Example: `.remove.click(clickFunction)`. |
-| .set()         | *Function*. Pass a function that will be applied to a `.forEach()` method, iterating through the object. | The templated array it was called upon.                     | More info on [.forEach() at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach). |
-| .get()         | *Function*. Pass a function that will be applied to a `.forEach()` method, iterating through the object. | A new array containing the return values from the function. | More info on [.forEach() at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach). |
-| .only()        | *Number*. Pass a positive integer, corresponding to the index of the item in the quick-select array. | A templated array containing only the selected element.     | `.only(0)` selects the first item on the page that matched the quick-select query. |
+| .set()         | *Function*. Pass a function that will be applied to a `Array.forEach()` method, iterating through the object. | The templated array it was called upon.                     | More info on [Array.forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) - MDN. |
+| .get()         | *Function*. Pass a function that will be applied to a Array`.forEach()` method, iterating through the object. | A new array containing the return values from the function. | More info on [Array.forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) - MDN. |
+| .filter()      | *Function*. Pass a function that will be applied to a Array`.filter()` method, iterating through the object. | A templated array containing only the filtered elements.    | More info on [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) - MDN. |
+| .only()        | *Number*. Pass a positive integer, corresponding to the index of the item in the quick-select array. | A templated array containing only the selected element.     | `.only(0)` selects the first item on the page that matched the quick-select query, `only(1)` selects the second, etc. |
 
 Note: All Array methods work, but the above methods all return a templated quick-select array (apart from `.get()`), and can be used with method chaining.
