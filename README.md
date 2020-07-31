@@ -57,23 +57,23 @@ Selecting only `.element` elements with the `innerHTML` value of 'Apples':
 const filtered = qs`.subtitle`.filter(element => element.innerHTML === 'Apples')
 ```
 
-Selecting only the first `.subtitle` element and adding a class  (`only()`'s argument corresponds to array index of query):
+Selecting only the first `.subtitle` element and adding a class  (`only(0)` returns the first selected element, `only(1)` returns the second, etc.):
 
 ```javascript
-qs`.subtitle`.only(0).set(p => p.classList.add = 'first-paragraph')
+qs`.subtitle`.only(0).set(element => element.classList.add = 'first-subtitle')
 ```
 ### Setting & getting
 
 Setting text colour of elements to red:
 
 ```javascript
-qs`p`.set(element => element.style.color  = 'red')
+qs`p`.set(el => el.style.color  = 'red')
 ```
 
 Getting an array containing the text content of each `<p>` element:
 
 ```javascript
-const paragraphText = qs`p`.get(element => element.textContent)
+const paragraphText = qs`p`.get(el => el.textContent)
 ```
 
 ### Modifying vanilla-selected elements
@@ -121,6 +121,32 @@ for (const box of textBox) {
     box.style.color = 'red'
   }
 }
+```
+
+### Adding a change event to every other textarea, from the second
+```javascript
+// Quick selector
+qs`textarea`.filter((el, index) => index % 2).change(ev => ev.target.value = 'Changed')
+
+// Vanilla
+const textareas = querySelectorAll('textarea')
+for (i = 0; i < textareas.length; i++) {
+  if (i % 2) {
+    textareas[i].addEventListener('change', ev => {
+      ev.target.value = 'Changed'
+    })
+  }
+}
+
+// Vanilla functional
+const textareas = querySelectorAll('textarea')
+textareas = Array.from(textareas)
+textareas.filter((el, index) => index % 2).forEach(el => {
+    el.addEventListener('change', ev => {
+      ev.target.value = 'Changed'
+    })
+  })
+})
 ```
 
 ## API
