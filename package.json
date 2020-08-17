@@ -1,6 +1,6 @@
 {
   "name": "quick-selector",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Syntactic sugar for querySelector, querySelectorAll, & addEventListener allowing you to select, modify, and add event listeners for multiple elements in one line of code. Tiny package (<1KB GZIP).",
   "homepage": "https://github.com/CTNicholas/quick-selector#readme",
   "bugs": {
@@ -8,20 +8,26 @@
   },
   "source": "src/index.js",
   "main": "dist/qs.js",
-  "module": "dist/qs.module.js",
-  "unpkg": "dist/qs.umd.js",
+  "module": "dist/qs.js",
+  "unpkg": "dist/qs.js",
   "scripts": {
-    "build": "microbundle --name qs",
-    "dev": "microbundle watch --name qs",
+    "build": "rollup --config",
+    "dev": "rollup --config --watch",
     "test": "jest --watch"
   },
   "author": "CTNicholas",
   "license": "ISC",
   "devDependencies": {
+    "@babel/preset-env": "^7.11.0",
+    "@rollup/plugin-babel": "^5.2.0",
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
     "jest": "^26.1.0",
-    "microbundle": "^0.12.3"
+    "rollup-plugin-terser": "^7.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "rollup": "^2.26.3"
+  },
   "keywords": [
     "querySelector",
     "querySelectorAll",
