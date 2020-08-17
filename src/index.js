@@ -17,7 +17,6 @@ module.exports = function (literals, ...substitutions) {
     return addTemplate(query)
   }
   return newQuerySelector(query)
-  }
 }
 
 /*

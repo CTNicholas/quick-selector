@@ -11,9 +11,9 @@
   "module": "dist/qs.module.js",
   "unpkg": "dist/qs.umd.js",
   "scripts": {
-    "build": "microbundle",
-    "dev": "microbundle watch",
-    "test": "jest"
+    "build": "microbundle --name qs",
+    "dev": "microbundle watch --name qs",
+    "test": "jest --watch"
   },
   "author": "CTNicholas",
   "license": "ISC",
