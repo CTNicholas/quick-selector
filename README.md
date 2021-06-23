@@ -7,13 +7,13 @@ Syntactic sugar for `querySelector`, `querySelectorAll`, & `addEventListener` al
 ### Node
 
 ```shell
-npm install query-selector
+npm install quick-selector
 ```
 
 ```javascript
-import qs from 'query-selector'
+import qs from 'quick-selector'
 // or
-const qs = require('query-selector')
+const qs = require('quick-selector')
 ```
 
 ### Browser
@@ -34,7 +34,7 @@ const boxes = qs`div.box`
 
 *This always returns an array of elements, not just one element.*
 
-### Events 
+### Events
 
 Adding and removing click event listener:
 
@@ -62,12 +62,13 @@ Selecting only the first `.subtitle` element and adding a class  (`only(0)` retu
 ```javascript
 qs`.subtitle`.only(0).set(element => element.classList.add = 'first-subtitle')
 ```
+
 ### Setting & getting
 
 Setting text colour of elements to red:
 
 ```javascript
-qs`p`.set(el => el.style.color  = 'red')
+qs`p`.set(el => el.style.color = 'red')
 ```
 
 Getting an array containing the text content of each `<p>` element:
@@ -105,7 +106,7 @@ for (const input of emailInput) {
 }
 ```
 
-### Selecting, filtering selection, adding event listener, setting text colour 
+### Selecting, filtering selection, adding event listener, setting text colour
 
 ```javascript
 const clickFunc = () => console.log("I've been clicked")
@@ -124,6 +125,7 @@ for (const box of textBox) {
 ```
 
 ### Adding a change event to every other textarea, from the second
+
 ```javascript
 // Quick selector
 qs`textarea`.filter((el, index) => index % 2).change(ev => ev.target.value = 'Changed')
@@ -139,12 +141,10 @@ for (i = 0; i < textareas.length; i++) {
 }
 
 // Vanilla functional
-const textareas = querySelectorAll('textarea')
-textareas = Array.from(textareas)
+const textareas = Array.from(querySelectorAll('textarea'))
 textareas.filter((el, index) => index % 2).forEach(el => {
-    el.addEventListener('change', ev => {
-      ev.target.value = 'Changed'
-    })
+  el.addEventListener('change', ev => {
+    ev.target.value = 'Changed'
   })
 })
 ```
@@ -164,7 +164,7 @@ textareas.filter((el, index) => index % 2).forEach(el => {
 | .*eventName*() | *Function*. A function to be added to the event.             | The templated array it was called upon.                     | Every single event compatible with the user's browser will work. See Examples:  `.click`, `.mousedown`, `.blur`. |
 | .remove        | *None*. Use in conjunction with an *eventName*() method.     | N/A                                                         | Use `.remove` before an *eventName*() function, with the original function as the argument. Example: `.remove.click(clickFunction)`. |
 | .set()         | *Function*. Pass a function that will be applied to a `Array.forEach()` method, iterating through the object. | The templated array it was called upon.                     | More info on [Array.forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) - MDN. |
-| .get()         | *Function*. Pass a function that will be applied to a Array`.forEach()` method, iterating through the object. | A new array containing the return values from the function. | More info on [Array.forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) - MDN. |
+| .get()         | *Function*. Pass a function that will be applied to a Array`.map()` method, iterating through the object. | A new array containing the return values from the function. | More info on [Array.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) - MDN. |
 | .filter()      | *Function*. Pass a function that will be applied to a Array`.filter()` method, iterating through the object. | A templated array containing only the filtered elements.    | More info on [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) - MDN. |
 | .only()        | *Number*. Pass a positive integer, corresponding to the index of the item in the quick-select array. | A templated array containing only the selected element.     | `.only(0)` selects the first item on the page that matched the quick-select query, `only(1)` selects the second, etc. |
 
